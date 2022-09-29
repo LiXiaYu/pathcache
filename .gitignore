@@ -1,3 +1,3 @@
-build/
-dist/
-pathcache.egg-info/
+build
+dist
+pathcache.egg-info
