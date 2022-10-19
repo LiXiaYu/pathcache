@@ -48,6 +48,8 @@ class PathCacheManager(object):
                         shutil.copy(abs_path, self.cache_dict[abs_path])
             else:
                 if foldercontext:
+                    if os.path.exists(self.cache_dict[abs_path]):
+                        shutil.rmtree(self.cache_dict[abs_path])
                     shutil.copytree(
                         abs_path, self.cache_dict[abs_path])
                 else:
