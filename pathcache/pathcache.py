@@ -55,7 +55,8 @@ class PathCacheManager(object):
                         shutil.copytree(
                             abs_path, self.cache_dict[abs_path])
                     else:
-                        os.makedirs(self.cache_dict[abs_path], exist_ok=True)
+                        folder_path = os.path.dirname(self.cache_dict[abs_path])
+                        os.makedirs(folder_path, exist_ok=True)
 
         return result_path
 
