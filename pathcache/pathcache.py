@@ -12,6 +12,26 @@ class PathCacheManager(object):
     def __init__(self) -> None:
         self.cache_root_folder_path = os.path.abspath(
             self.cache_root_folder_path)
+        
+        # register the root path
+        self.cache_dict["/"] = self.cache_root_folder_path
+
+        # register all exist path
+        # 获取文件夹下面所有文件和文件夹的路径
+        for root, dirs, files in os.walk(self.cache_root_folder_path):
+            for file in files:
+                result_path = os.path.join(root, file)
+                # 删除abs_path中的self.cache_root_folder_path
+                abs_path=result_path[len(self.cache_root_folder_path):]
+
+                self.cache_dict[abs_path] = result_path
+            for dir in dirs:
+                result_path = os.path.join(root, dir)
+                # 删除abs_path中的self.cache_root_folder_path
+                abs_path=result_path[len(self.cache_root_folder_path):]
+
+                self.cache_dict[abs_path] = result_path
+
         pass
 
     def pathstr(self, path: str, foldercontext=False, refresh=False) -> str:
